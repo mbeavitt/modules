@@ -353,15 +353,11 @@ jobs:
         with:
           version: latest-everything
 
-        # For OCI containers
-      - name: Set XDG_RUNTIME_DIR
-        run: echo "XDG_RUNTIME_DIR=/run/user/$UID" >> $GITHUB_ENV
-
       - name: Install Singularity
         if: matrix.profile == 'singularity'
         run: |
           wget https://github.com/sylabs/singularity/releases/download/v4.0.2/singularity-ce_4.0.2-jammy_amd64.deb
-          sudo apt-get install -y crun libfuse2
+          sudo apt-get install -y libfuse2
           sudo dpkg -i singularity-ce_4.0.2-jammy_amd64.deb
 
       - name: Set up Singularity
@@ -543,9 +539,12 @@ jobs:
           wget -qO- https://code.askimed.com/install/nf-test | bash
           sudo mv nf-test /usr/local/bin/
 
-      - name: Setup apptainer
+      - name: Install Singularity
         if: matrix.profile == 'singularity'
-        uses: eWaterCycle/setup-apptainer@main
+        run: |
+          wget https://github.com/sylabs/singularity/releases/download/v4.0.2/singularity-ce_4.0.2-jammy_amd64.deb
+          sudo apt-get install -y libfuse2
+          sudo dpkg -i singularity-ce_4.0.2-jammy_amd64.deb
 
       - name: Set up Singularity
         if: matrix.profile == 'singularity'
