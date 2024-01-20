@@ -4,8 +4,8 @@ process BAM2FASTX_BAM2FASTQ {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bam2fastx:1.3.1--hf05d43a_1':
-        'biocontainers/bam2fastx:1.3.1--hf05d43a_1' }"
+        'https://depot.galaxyproject.org/singularity/pbtk:3.1.1--h9ee0642_0':
+        'biocontainers/pbtk:3.1.1--h9ee0642_0' }"
 
     input:
     tuple val(meta), path(bam), path(index)
